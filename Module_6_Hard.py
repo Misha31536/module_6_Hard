@@ -101,6 +101,19 @@ class Triangle(Figure):
         super().__init__(color, sides, filled)
         self.__height = height
         self.__set_height()
+    #     self.existence()
+    #
+    # def existence(self):
+    #     if isinstance(self.sides, list) and len(self.sides) == 3:
+    #         if (self.sides[0] + self.sides[1] > self.sides[2]
+    #         and self.sides[0] + self.sides[2] > self.sides[1]
+    #             and self.sides[1] + self.sides[2] > self.sides[0]):
+    #             print('Треугольник существует')
+    #         else:
+    #             print("Невозможно построить такой треугольник")
+    #             self.__del__()
+
+
 
     def __set_height(self):
         if isinstance(self.sides, int):
@@ -153,15 +166,14 @@ class Cube(Figure):
         self.re_sides()
 
     def re_sides(self):
-        print(type(self.sides))
         n = self.sides
         List_ = [n for i in range(self.sides_count)]
-        print(List_)
         self.sides = List_
 
 
     def get_volume(self):
-        pass
+        V = self.sides[0][0]**3
+        return V
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 triangle1 = Triangle((200, 200, 100), 10) # (Цвет, стороны)
@@ -172,40 +184,43 @@ cube1 = Cube((222, 35, 130), 6)
 
 # # # Круг
 
-#circle1.color = 55, 66, 77 # Изменится
-#print(circle1.color)
+circle1.color = 55, 66, 77 # Изменится
+print(circle1.color)
 
 # # # Треугольник
 
-# print(triangle1.color)
-# triangle1.color = 30, 30 ,30 # Изменится
-# print(triangle1.color)
-# triangle1.color = 30, 30 ,-30 # Не Изменится
-# print(len(triangle1))
-# triangle1.set_sides(20)
-# print(triangle1.get_sides())
-# print(triangle1.get_square())
+print(triangle1.color)
+triangle1.color = 30, 30 ,30 # Изменится
+print(triangle1.color)
+triangle1.color = 30, 30 ,-30 # Не Изменится
+print(len(triangle1))
+triangle1.set_sides(20)
+print(triangle1.get_sides())
+print(triangle1.get_square())
 
 
 # # # Куб
 
 cube1.color = 300, 70, 15 # Не изменится
 print(cube1.color)
+cube1.color = 200, 70, 15 # Не изменится
+print(cube1.color)
 #
 # # Проверка на изменение сторон:
-# cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
+cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
 print(cube1.get_sides())
-# Реализовано с помощью PROPERTY()
-# circle1.set_sides(12) # Изменится
-# print(circle1.get_sides())
-#print(circle1.sides)
-#
-# # Проверка периметра (круга), это и есть длина:
-# print(len(circle1))
-#
-# # Проверка объёма (куба):
-# print(cube1.get_volume())
 
+# Реализовано с помощью PROPERTY()
+
+circle1.set_sides(12) # Изменится
+print(circle1.get_sides())
+print(circle1.sides)
+
+# # Проверка периметра (круга), это и есть длина:
+print(len(circle1))
+
+# Проверка объёма (куба):
+print(cube1.get_volume())
 
 
 
