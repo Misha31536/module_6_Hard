@@ -5,7 +5,10 @@ class Figure:
 
     def __init__(self, color, sides, filled = False):
         self.__sides = int(sides)
-        self.__color = list(color)
+        if self.__is_valid_color(color):
+            self.__color = list(color)
+        else:
+            self.__color = None
         self.filled = bool(filled)
 
     @property
@@ -57,7 +60,7 @@ class Figure:
                 self.__sides = []
                 for i in range(self.sides_count):
                     self.__sides.append(new_sides[0])
-                    return self.__sides
+                return self.__sides
             if len(new_sides) == self.sides_count:
                 self.__sides = list(new_sides)
 
@@ -101,19 +104,6 @@ class Triangle(Figure):
         super().__init__(color, sides, filled)
         self.__height = height
         self.__set_height()
-    #     self.existence()
-    #
-    # def existence(self):
-    #     if isinstance(self.sides, list) and len(self.sides) == 3:
-    #         if (self.sides[0] + self.sides[1] > self.sides[2]
-    #         and self.sides[0] + self.sides[2] > self.sides[1]
-    #             and self.sides[1] + self.sides[2] > self.sides[0]):
-    #             print('Треугольник существует')
-    #         else:
-    #             print("Невозможно построить такой треугольник")
-    #             self.__del__()
-
-
 
     def __set_height(self):
         if isinstance(self.sides, int):
@@ -139,7 +129,7 @@ class Triangle(Figure):
         else:
             if len(self.sides) > 1:
                 s = sum(self.sides) / 2
-                heron = 0
+                heron = 1
                 for i in range(len(self.sides)):
                     heron *= (s - self.sides[i])
                 square = sqrt(s * heron)
@@ -163,64 +153,54 @@ class Cube(Figure):
 
     def __init__(self, color, sides, filled = False):
         super().__init__(color, sides, filled)
-        self.re_sides()
-
-    def re_sides(self):
-        n = self.sides
-        List_ = [n for i in range(self.sides_count)]
-        self.sides = List_
-
+        self.set_sides(sides)
 
     def get_volume(self):
-        V = self.sides[0][0]**3
-        return V
+        pass
 
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 triangle1 = Triangle((200, 200, 100), 10) # (Цвет, стороны)
-cube1 = Cube((222, 35, 130), 6)
+# cube1 = Cube((222, 35, 130), 6)
+# #
+# # Проверка на изменение цветов:
+# # # Реализовано с помощью Декораторов @property
 #
-# Проверка на изменение цветов:
-# # Реализовано с помощью Декораторов @property
-
-# # # Круг
-
-circle1.color = 55, 66, 77 # Изменится
-print(circle1.color)
-
-# # # Треугольник
-
-print(triangle1.color)
-triangle1.color = 30, 30 ,30 # Изменится
-print(triangle1.color)
-triangle1.color = 30, 30 ,-30 # Не Изменится
-print(len(triangle1))
+# # # # Круг
+#
+# circle1.color = 55, 66, 77 # Изменится
+# print(circle1.color)
+#
+# # # # Треугольник
+#
+# print(triangle1.color)
+# triangle1.color = 30, 30 ,30 # Изменится
+# print(triangle1.color)
+# triangle1.color = 30, 30 ,-30 # Не Изменится
+# print(len(triangle1))
 triangle1.set_sides(20)
-print(triangle1.get_sides())
+# print(triangle1.get_sides())
 print(triangle1.get_square())
 
 
 # # # Куб
 
-cube1.color = 300, 70, 15 # Не изменится
-print(cube1.color)
-cube1.color = 200, 70, 15 # Не изменится
-print(cube1.color)
+# cube1.color = 300, 70, 15 # Не изменится
+# print(cube1.color)
 #
 # # Проверка на изменение сторон:
-cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
-print(cube1.get_sides())
-
+# cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
+#print(cube1.get_sides())
 # Реализовано с помощью PROPERTY()
-
-circle1.set_sides(12) # Изменится
-print(circle1.get_sides())
-print(circle1.sides)
-
+# circle1.set_sides(12) # Изменится
+# print(circle1.get_sides())
+#print(circle1.sides)
+#
 # # Проверка периметра (круга), это и есть длина:
-print(len(circle1))
+# print(len(circle1))
+#
+# # Проверка объёма (куба):
+# print(cube1.get_volume())
 
-# Проверка объёма (куба):
-print(cube1.get_volume())
 
 
 
